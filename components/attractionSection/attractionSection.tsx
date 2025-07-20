@@ -1,11 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
-import { AttractionSectionProps, AreaData } from './types';
+import { AttractionSectionProps as BaseProps, AttractionCard, AreaData } from './types';
 import TabBar from '../tabBar/tabBar';
 import CardGrid from '../cardGrid/cardGrid';
 
-const AttractionSection: React.FC<AttractionSectionProps> = ({ title, areas }) => {
+export interface AttractionSectionProps extends BaseProps {
+  onCardClick?: (item: AttractionCard) => void;
+}
+
+export default function AttractionSection({ title, areas, onCardClick }: AttractionSectionProps) {
   // 각 영역별 활성 탭 상태 관리 (Area.name을 키로 사용)
   const [activeTabs, setActiveTabs] = useState<Record<string, string>>(
     areas.reduce((acc, area) => {
@@ -37,12 +41,10 @@ const AttractionSection: React.FC<AttractionSectionProps> = ({ title, areas }) =
             )}
 
             {/* 카드 그리드 */}
-            <CardGrid items={items} />
+            <CardGrid items={items} onCardClick={onCardClick} />
           </div>
         );
       })}
     </section>
   );
-};
-
-export default AttractionSection;
+}

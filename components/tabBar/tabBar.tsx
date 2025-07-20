@@ -2,15 +2,21 @@
 
 import React from 'react';
 
-interface TabBarProps {
-  tabs: string[];
-  active: string;
-  onChange: (tab: string) => void;
+export interface TabBarProps<T extends string> {
+  tabs: readonly T[];
+  active: T;
+  onChange: (tab: T) => void;
+  className?: string;
 }
 
-const TabBar: React.FC<TabBarProps> = ({ tabs, active, onChange }) => {
+export default function TabBar<T extends string>({
+  tabs,
+  active,
+  onChange,
+  className = '',
+}: TabBarProps<T>) {
   return (
-    <nav className='overflow-x-auto mb-4'>
+    <nav className={`overflow-x-auto mb-4 ${className}`}>
       <ul className='flex space-x-2'>
         {tabs.map(tab => (
           <li key={tab}>
@@ -26,6 +32,4 @@ const TabBar: React.FC<TabBarProps> = ({ tabs, active, onChange }) => {
       </ul>
     </nav>
   );
-};
-
-export default TabBar;
+}

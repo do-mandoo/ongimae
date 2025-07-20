@@ -1,1 +1,13 @@
 @import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* 내용 길이와 상관없이 스크롤바 트랙을 항상 확보 */
+    overflow-y: scroll;
+    /* 실제 스크롤바가 없어도 레이아웃 흔들림 없이 거터 공간만 확보 */
+    scrollbar-gutter: stable;
+  }
+}

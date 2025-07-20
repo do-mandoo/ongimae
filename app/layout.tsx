@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Roboto, Krub } from 'next/font/google';
 import './globals.css';
 import NavUI from '@/components/ui/navUI';
+import Header from '@/components/ui/header';
 
 const roboto = Roboto({ subsets: ['latin'] });
 const krub = Krub({ subsets: ['latin'], weight: ['200', '300', '400', '500', '600', '700'] });
@@ -18,9 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <head>
+        {/* Material Icons 웹폰트 로드 */}
+        <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet' />
+      </head>
       <body
         className={` ${roboto.className} ${krub.className} bg-white max-w-[430px] mx-auto min-w-xs antialiased`}
       >
+        <Header />
         {children}
         <NavUI />
       </body>

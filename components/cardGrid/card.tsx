@@ -12,10 +12,12 @@ import Image from 'next/image';
 
 interface CardProps {
   item: AttractionCard;
+  onClick?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ item }) => {
-  const images = item.images ?? [];
+export default function Card({ item, onClick }: CardProps) {
+  const validImages = (item.images ?? []).filter(src => typeof src === 'string' && src.length > 0);
+
   const [isFavorite, setIsFavorite] = useState<boolean>(item.favorite ?? false);
 
   const toggleFavorite = () => {
@@ -24,9 +26,12 @@ const Card: React.FC<CardProps> = ({ item }) => {
   };
 
   return (
-    <div className='w-40 rounded-2xl shadow-md overflow-hidden relative'>
+    <div
+      onClick={onClick}
+      className='cursor-pointer bg-sky-100 w-40 rounded-2xl shadow-md overflow-hidden relative'
+    >
       {/* 이미지 슬라이더 또는 이미지가 없을 때 placeholder */}
-      {images.length > 0 ? (
+      {validImages.length > 0 ? (
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={0}
@@ -35,7 +40,7 @@ const Card: React.FC<CardProps> = ({ item }) => {
           pagination={{ clickable: true }}
           className='w-full h-32'
         >
-          {item.images?.map((src, idx) => (
+          {validImages.map((src, idx) => (
             <SwiperSlide key={idx}>
               <div className='relative w-full h-32'>
                 <Image
@@ -56,7 +61,10 @@ const Card: React.FC<CardProps> = ({ item }) => {
 
       {/* 즐겨찾기 아이콘 */}
       <button
-        onClick={toggleFavorite}
+        onClick={e => {
+          e.stopPropagation();
+          toggleFavorite();
+        }}
         aria-label={isFavorite ? 'Unfavorite' : 'Favorite'}
         className='absolute top-2 right-2 focus:outline-none'
       >
@@ -75,6 +83,4 @@ const Card: React.FC<CardProps> = ({ item }) => {
       </div>
     </div>
   );
-};
-
-export default Card;
+}

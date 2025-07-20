@@ -22,6 +22,7 @@ export interface AttractionCard {
   images?: string[]; // 슬라이드용 이미지 URL 리스트 (최소 1개 이상)
   favorite?: boolean | undefined; // 즐겨찾기 여부(Favorites 섹션 용도)
   favoriteInfo?: FavoriteInfo; // 즐겨찾기 API에서 받은 추가 정보가 필요할 때 포함
+  address?: string;
 }
 
 // Gangwon-do, Gyeongju 등 하나의 "영역(Area)"에 대한 데이터

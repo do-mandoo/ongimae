@@ -6,16 +6,15 @@ import Card from './card';
 
 interface CardGridProps {
   items: AttractionCard[];
+  onCardClick?: (item: AttractionCard) => void;
 }
 
-const CardGrid: React.FC<CardGridProps> = ({ items }) => {
+export default function CardGrid({ items, onCardClick }: CardGridProps) {
   return (
     <div className='grid grid-rows-2 grid-flow-col gap-4 overflow-x-auto '>
       {items.map(item => (
-        <Card key={item.id} item={item} />
+        <Card key={item.id} item={item} onClick={() => onCardClick?.(item)} />
       ))}
     </div>
   );
-};
-
-export default CardGrid;
+}

@@ -8,7 +8,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const NavUI = () => {
+export default function NavUI() {
   const pathname = usePathname();
 
   const navItems = [
@@ -73,5 +73,4 @@ const NavUI = () => {
       </Link>
     </nav>
   );
-};
-export default NavUI;
+}

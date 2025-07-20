@@ -1,6 +1,5 @@
 import Image from 'next/image';
-
-const Header = () => {
+export default function Header() {
   return (
     // <div className='h-[225px]'>
     //   <div>WHILE</div>
@@ -9,10 +8,14 @@ const Header = () => {
     //   <div>온 김에</div>
     //   <div></div>
     // </div>
-    <>
-      <Image src='/image_img.png' alt='imgae' width={430} height={225} />
-    </>
+    <header>
+      <Image
+        src='/image_img.png'
+        alt='imgae'
+        width={430}
+        height={225}
+        className='border-x border-neutral-400'
+      />
+    </header>
   );
-};
-
-export default Header;
+}
